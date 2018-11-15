@@ -54,12 +54,14 @@ class Image(Resource):
         return client.images.get(image_id).attrs
 
     def delete(self, image_id):
+        delImg = 0
         try:
             delImg = client.images.remove(image_id)
-            return delImg, 204
         except APIError as err:
-            app.logger.info('Delete Image : %s', err)
+            app.logger.info('Delete Image : %s', err__str__)
             return err.__str__, err.response.status_code
+        finally:
+            return delImg, 204
 
 class ImageHistory(Resource):
     def get(self, image_id):
