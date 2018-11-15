@@ -2,6 +2,7 @@
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
+from docker.errors import APIError
 import docker
 import logging
 
@@ -53,9 +54,12 @@ class Image(Resource):
         return client.images.get(image_id).attrs
 
     def delete(self, image_id):
-        delImg = client.images.remove(image_id)
-        app.logger.info('Delete Image : %s', delImg)
-        return delImg, 204
+        try:
+            delImg = client.images.remove(image_id)
+            return delImg, 204
+        except APIError as err:
+            app.logger.info('Delete Image : %s', err)
+            return err
 
 class ImageHistory(Resource):
     def get(self, image_id):
