@@ -59,7 +59,7 @@ class Image(Resource):
             return delImg, 204
         except APIError as err:
             app.logger.info('Delete Image : %s', err)
-            return err
+            return err.__str__, err.response.status_code
 
 class ImageHistory(Resource):
     def get(self, image_id):
