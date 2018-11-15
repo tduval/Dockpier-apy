@@ -53,8 +53,8 @@ class Image(Resource):
         return client.images.get(image_id).attrs
 
     def delete(self, image_id):
-            delImg = client.images.remove(image_id)
-            app.logger.info('Delete Image : %s', delImg)
+        delImg = client.images.remove(image_id)
+        app.logger.info('Delete Image : %s', delImg)
         return delImg, 204
 
 class ImageHistory(Resource):
