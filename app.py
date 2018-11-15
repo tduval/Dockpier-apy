@@ -58,8 +58,8 @@ class Image(Resource):
         try:
             delImg = client.images.remove(image_id)
         except APIError as err:
-            app.logger.info('Delete Image : %s', err)
-            return "Error image cannot be deleted", 500
+            app.logger.info('Delete Image : %s', str(err))
+            return {'message': err.explanation, 'reason': err.response.reason, 'status_code': err.response.status_code}, err.response.status_code
         return delImg, 204
 
 class ImageHistory(Resource):
