@@ -7,7 +7,7 @@ import logging
 
 app = Flask(__name__)
 api = Api(app)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 parser = reqparse.RequestParser()
 
