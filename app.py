@@ -78,7 +78,7 @@ class ImageSearch(Resource):
     def post(self):
         parser.add_argument('name', help='Package name')
         args = parser.parse_args()
-        img = client.images.serch(args.name)
+        img = client.images.search(args.name)
         return img, 201
 
 ## Container Section ##
