@@ -96,7 +96,7 @@ class Container(Resource):
     def delete(self, container_id):
         delCntr = 0
         try:
-            delCntr = client.containers.remove(container_id)
+            delCntr = client.containers.get(container_id).remove()
         except APIError as err:
             app.logger.info('Delete Container : %s', str(err))
             return {'message': err.explanation, 'reason': err.response.reason, 'status_code': err.response.status_code}, err.response.status_code
@@ -142,7 +142,7 @@ class Network(Resource):
     def delete(self, net_id):
         delNet = 0
         try:
-            delNet = client.networks.remove(net_id)
+            delNet = client.networks.get(net_id).remove()
         except APIError as err:
             app.logger.info('Delete Network : %s', str(err))
             return {'message': err.explanation, 'reason': err.response.reason, 'status_code': err.response.status_code}, err.response.status_code
@@ -163,7 +163,7 @@ class Volume(Resource):
     def delete(self, vol_id):
         delVol = 0
         try:
-            delVol = client.volumes.remove(vol_id)
+            delVol = client.volumes.get(vol_id).remove()
         except APIError as err:
             app.logger.info('Delete Volume : %s', str(err))
             return {'message': err.explanation, 'reason': err.response.reason, 'status_code': err.response.status_code}, err.response.status_code
