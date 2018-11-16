@@ -94,7 +94,13 @@ class Container(Resource):
         return client.containers.get(container_id).attrs
 
     def delete(self, container_id):
-        return client.containers.remove(container_id), 204
+        delCntr = 0
+        try:
+            delCntr = client.containers.remove(container_id)
+        except APIError as err:
+            app.logger.info('Delete Container : %s', str(err))
+            return {'message': err.explanation, 'reason': err.response.reason, 'status_code': err.response.status_code}, err.response.status_code
+        return delCntr, 204
 
 class ContainerStatus(Resource):
     def get(self, container_id):
@@ -134,7 +140,13 @@ class Network(Resource):
         return client.networks.get(net_id)
 
     def delete(self, net_id):
-        return client.networks.remove(net_id), 204
+        delNet = 0
+        try:
+            delNet = client.networks.remove(net_id)
+        except APIError as err:
+            app.logger.info('Delete Network : %s', str(err))
+            return {'message': err.explanation, 'reason': err.response.reason, 'status_code': err.response.status_code}, err.response.status_code
+        return delNet, 204
 
 ## Volumes Section ##
 class Volumes(Resource):
@@ -149,7 +161,13 @@ class Volume(Resource):
         return client.volumes.get(vol_id)
 
     def delete(self, vol_id):
-        return client.volumes.remove(vol_id), 204
+        delVol = 0
+        try:
+            delVol = client.volumes.remove(vol_id)
+        except APIError as err:
+            app.logger.info('Delete Volume : %s', str(err))
+            return {'message': err.explanation, 'reason': err.response.reason, 'status_code': err.response.status_code}, err.response.status_code
+        return delVol, 204
 
 
 client = docker.from_env()
