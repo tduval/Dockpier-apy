@@ -1,3 +1,5 @@
+![Docker Automated build](https://img.shields.io/docker/automated/tduval/dockpier-apy.svg?style=flat-square) [![Docker Build Status](https://img.shields.io/docker/build/tduval/dockpier-apy.svg?style=flat-square)](https://hub.docker.com/r/tduval/dockpier-apy/)
+
 # Dockpier-apy
 Dockpier-apy is a personal project to study Docker Container and API usage.
 This repository is the backend python component for the main project Dockpier (https://github.com/tduval/Dockpier/)
